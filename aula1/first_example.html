@@ -17,134 +17,36 @@
             renderer.setSize( window.innerWidth, window.innerHeight );
             document.body.appendChild( renderer.domElement );
 
-            //var geometry = new THREE.BoxGeometry(1,1,1);
-
-            //var material = new THREE.MeshBasicMaterial({ vertexColors:THREE.VertexColors});
-
-            //var cube = new THREE.Mesh( geometry, material ); 
-
-            //scene.add( cube ); 
+            var geometry = new THREE.BoxGeometry(1,1,1);
             
-
-            var light = new THREE.DirectionalLight( 0xffffff );
-            light.position.set( 0, 1, 1 ).normalize();
-            scene.add(light);
-
-            /* TRIANGLE 1 - Coordinates : (0.0,  0.0,  0.0) ( 0.5,  0.75, 0.0) ( 1.0,  0.0,  0.0);*/ 
-            var geom = new THREE.Geometry();
-            var x1 = new THREE.Vector3(0,0,0);
-            var y1 = new THREE.Vector3(0.5,0.75,0);
-            var z1 = new THREE.Vector3(1,0,0);
-
-            geom.vertices.push(x1);
-            geom.vertices.push(y1);
-            geom.vertices.push(z1);
-
-            geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
-            geom.computeFaceNormals();
-
-
-            var material1 = new THREE.MeshBasicMaterial({
-                color: 0x0000FF, side: THREE.DoubleSide
-            });
+            var material = new THREE.MeshBasicMaterial( { 
+                color: 0x00ff00  , wireframe: true
+            } ); 
             
+            var cube = new THREE.Mesh( geometry, material ); 
             
-            material1.side = THREE.DoubleSide;
-
-            var tri1 = new THREE.Mesh( geom, material1);
-
-            scene.add( tri1 );
+            scene.add( cube ); 
             
-            
-        
-            /* TRIANGLE 2 - Coordinates : (0.0,  0.0,  0.0) (-0.35,-1.0,  0.0) (-0.7,  0.25, 0.0); */ 
-            var geom = new THREE.Geometry();
-            var x2 = new THREE.Vector3(0.0,0.0,0.0);
-            var y2 = new THREE.Vector3(-0.35,-1,0.0);
-            var z2 = new THREE.Vector3(-0.7, 0.25 ,0);
-
-            geom.vertices.push(x2);
-            geom.vertices.push(y2);
-            geom.vertices.push(z2);
-
-            geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
-            geom.computeFaceNormals();
-
-            
-            var material2 = new THREE.MeshBasicMaterial({
-                color: 0xFFFF00, side: THREE.DoubleSide
-            });
-
-
-            var tri2 = new THREE.Mesh( geom, material2);
-
-            scene.add( tri2 );
-
-
-            /* TRIANGLE 3 - Coordinates : (-0.2,  0.15,  0.0) (0.35, 0.65,  0.0) (-0.85, 0.9 , 0.0); */ 
-            var geom = new THREE.Geometry();
-            var x3 = new THREE.Vector3(-0.2,0.15,0);
-            var y3 = new THREE.Vector3(0.35,0.65,0.0);
-            var z3 = new THREE.Vector3(-0.85, 0.9 ,0);
-
-            geom.vertices.push(x3);
-            geom.vertices.push(y3);
-            geom.vertices.push(z3);
-
-            geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
-            geom.computeFaceNormals();
-
-            
-            var material3 = new THREE.MeshBasicMaterial({
-                color: new THREE.Color("rgb(0, 255, 0)"),
-            });
-
-
-            var tri3 = new THREE.Mesh( geom, material3);
-
-            scene.add( tri3 );
-
-
-
-            /* TRIANGLE 4 - Coordinates : (0.15,  -0.95,  0.0) (0.90, -0.7,  0.0) (0.65, 0.1 , 0.0); */ 
-            var geom = new THREE.Geometry();
-            var x4 = new THREE.Vector3(0.15,-0.95,0);
-            var y4 = new THREE.Vector3(0.90,-0.7,0.0);
-            var z4 = new THREE.Vector3(0.65, 0.1 ,0);
-
-            geom.vertices.push(x4);
-            geom.vertices.push(y4);
-            geom.vertices.push(z4);
-
-            geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
-            geom.computeFaceNormals();
-
-            var material4 = new THREE.MeshBasicMaterial({
-                color: 0xFFFFFF,
-                wireframe: true
-            });
-            
-            var tri4 = new THREE.Mesh( geom, material4);
-
-            scene.add( tri4 );
-
-
-
-            camera.position.z = 5
-
+            camera.position.z = 5;
 
             function render() {
                 requestAnimationFrame(render);
-
-                //geometry.faces[0].vertexColors[0] = new THREE.Color(0xFF0000);
                 
-                //cube.rotation.x += 0.01;
-                //cube.rotation.y += 0.01;
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
 
                 renderer.render(scene, camera);
             }
-
             render();
+
+            window.addEventListener('resize', function () {				       
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                
+                camera.aspect = window.innerWidth / window.innerHeight;
+        
+                camera.updateProjectionMatrix();
+            });
+
 		</script>
 	</body>
 </html>
