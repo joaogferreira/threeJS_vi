@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+        <script src="https://rawgithub.com/mrdoob/three.js/master/build/three.js"></script>
+
+        <!-- Trackball Controls -->
+        <script src="TrackballControls.js"></script>
+		<script>
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
+
+            var scene = new THREE.Scene();
+            
+            var camera = new THREE.OrthographicCamera( -3 , 3, 4, -4 );
+
+        
+            var controls = new THREE.TrackballControls(camera, renderer.domElement );
+
+            
+            camera.position.z = 5;
+            controls.update();
+
+
+            var geometry = new THREE.BoxGeometry(1,1,1);
+            
+            var material = new THREE.MeshBasicMaterial( { 
+                color: 0x00ff00  , wireframe: true
+            } ); 
+            
+            var cube = new THREE.Mesh( geometry, material ); 
+            
+            scene.add( cube ); 
+
+
+            function render() {
+                requestAnimationFrame(render);
+
+                controls.update();
+
+                renderer.render(scene, camera);
+            }
+            render();
+
+            window.addEventListener('resize', function () {				       
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                
+                camera.aspect = window.innerWidth / window.innerHeight;
+        
+                camera.updateProjectionMatrix();
+            });
+
+		</script>
+	</body>
+</html>
