@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<script src="https://rawgithub.com/mrdoob/three.js/master/build/three.js"></script>
+		<script>
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
+            
+            
+            var alight = new THREE.AmbientLight(0xffffff);
+            scene.add(alight);
+
+            const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+
+            const material = new THREE.MeshPhongMaterial( {color: 0xff0000, opacity: 0.5, transparent: true} );
+
+            //paralelipipedo
+            const paralel = new THREE.Mesh( geometry, material );
+            paralel.position.set( 0, 0, 0 );
+            paralel.scale.x = 2;
+            paralel.scale.y = 1;
+            paralel.scale.z = 4;
+
+
+            //cilindro1
+            var geometry1 = new THREE.CylinderGeometry(0.5,0.5,0.2,32);
+            
+            geometry1.rotateZ(-Math.PI * 0.5); 
+            
+            var material1 = new THREE.MeshBasicMaterial({
+                color: 0xffff00
+            });
+            
+            var cilindro1 = new THREE.Mesh( geometry1, material1 ); 
+            cilindro1.position.x = 1;
+            cilindro1.position.y = -0.5;
+            cilindro1.position.z = 2;
+
+            
+            //cilindro2 
+            var cilindro2 = new THREE.Mesh( geometry1, material1 ); 
+            cilindro2.position.x = -1;
+            cilindro2.position.y = -0.5;
+            cilindro2.position.z = 2;
+            
+            //cilindro3
+            var cilindro3 = new THREE.Mesh( geometry1, material1 ); 
+            cilindro3.position.x = 1;
+            cilindro3.position.y = -0.5;
+            cilindro3.position.z = -2;
+
+            //cilindro4
+            var cilindro4 = new THREE.Mesh( geometry1, material1 ); 
+            cilindro4.position.x = -1;
+            cilindro4.position.y = -0.5;
+            cilindro4.position.z = -2;
+
+            //cilindro verde
+            var geometryVerde = new THREE.CylinderGeometry(0.1,0.1,1,32);
+            
+            geometryVerde.rotateZ(-Math.PI * 0.5); 
+            
+            var materialVerde = new THREE.MeshBasicMaterial({
+                color: 0x00ff00
+            });
+            
+
+            var cilindroX = new THREE.Mesh( geometryVerde, materialVerde ); 
+            cilindroX.position.x = -0.5;
+            cilindroX.position.y = 1.5;
+            cilindroX.position.z = 0;
+
+            //cilindro azul
+            var geometryAzul = new THREE.CylinderGeometry(0.1,0.1,1,32);
+            
+            geometryAzul.rotateY(-Math.PI * 0.5); 
+            
+            var materialAzul = new THREE.MeshBasicMaterial({
+                color: 0x0000ff
+            });
+            
+
+            var cilindroY = new THREE.Mesh( geometryAzul, materialAzul ); 
+            cilindroY.position.x = -1;
+            cilindroY.position.y = 1;
+            cilindroY.position.z = 0;
+
+            //cilindro Vermelho
+            var geometryVermelho = new THREE.CylinderGeometry(0.1,0.1,1,32);
+            
+            geometryVermelho.rotateX(-Math.PI * 0.5); 
+            
+            var materialVermelho = new THREE.MeshBasicMaterial({
+                color: 0xff0000
+            });
+            
+
+            var cilindroZ = new THREE.Mesh( geometryVermelho, materialVermelho ); 
+            cilindroZ.position.x = -1;
+            cilindroZ.position.y = 1.5;
+            cilindroZ.position.z = 0.5;
+
+
+
+            const group = new THREE.Group();
+            group.add( paralel );
+            group.add( cilindro1 );
+            group.add( cilindro2 );
+            group.add( cilindro3 );
+            group.add( cilindro4 );
+            
+
+            const eixo = new THREE.Group();
+            eixo.add( cilindroX );
+            eixo.add( cilindroY );
+            eixo.add( cilindroZ );
+
+            scene.add( group );
+            scene.add( eixo );
+        
+
+            camera.position.z = 5;
+    
+
+
+            function render() {
+                requestAnimationFrame(render);
+
+                group.rotation.y += 0.01;
+                eixo.rotation.y += 0.01;
+
+                renderer.render(scene, camera);
+            }
+            render();
+
+            window.addEventListener('resize', function () {				       
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                
+                camera.aspect = window.innerWidth / window.innerHeight;
+        
+                camera.updateProjectionMatrix();
+            });
+
+		</script>
+	</body>
+</html>
