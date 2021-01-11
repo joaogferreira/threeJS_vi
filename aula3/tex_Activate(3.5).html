@@ -42,7 +42,6 @@
 
             
             document.addEventListener("keydown", onDocumentKeyDown, false);
-            //document.addEventListener("lightOnOff", onlightOnOff, false);
 
             light.visible = false;
             Amblight.visible = false;
@@ -63,7 +62,7 @@
                 // Get the key code of the pressed key 
                 var keyCode = event.which;
                 console.log("tecla " + keyCode);
-                if (keyCode == 76 && light.visible == false && Amblight.visible == false){
+                if (keyCode == 76 && light.visible == false && Amblight.visible == false){ //keycode 76 equivale ao L
                     light.visible = true;
                     Amblight.visible = true;
                 }
@@ -71,18 +70,16 @@
                     light.visible = false;
                     Amblight.visible = false;
                 }
-            }
-            
-            /*
-            function onlightOnOff(event){
-                var keyCode = event.which;
-                console.log("tecla " + keyCode);
-                if (keyCode == 76){
-                    light.visible = true;
-                    Amblight.visible = true;
+                else if(keyCode == 107){
+                    light.intensity += 0.1;
+                    Amblight.intensity +=0.1;
+                }
+                else if(keyCode == 109){
+                    light.intensity -= 0.1;
+                    Amblight.intensity -=0.1;
                 }
             }
-            */
+            
             window.addEventListener('resize', function () {				       
                 renderer.setSize(window.innerWidth, window.innerHeight);
                 
