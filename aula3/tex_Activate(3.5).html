@@ -22,23 +22,18 @@
             var texloader = new THREE.TextureLoader();
             var tex=texloader.load("imagens/earth_surface_2048.jpg");
 
-            //var Amblight = new THREE.AmbientLight(0x333333);
-            //var light = new THREE.DirectionalLight(0xfffff);
-            //var helper = new THREE.DirectionalLightHelper(light, (1,0,0));
-            /*
-            var material = new THREE.MeshBasicMaterial( { 
-                map: tex
-            });
-            */
             var light = new THREE.DirectionalLight( 0xfffff );
             light.position.set(1,0,0);
             scene.add(light);
 
             var Amblight = new THREE.AmbientLight(0x333333);
             scene.add(Amblight)
+
             var material = new THREE.MeshPhongMaterial( { 
                 map: tex //ambient: 0x333333, color: 0x333333, specular: 0x555555, shininess: 100
             });
+
+            material.needsUpdate = true
 
             var sphere = new THREE.Mesh( geometry, material ); 
             
@@ -46,20 +41,48 @@
             scene.add( sphere ); 
 
             
+            document.addEventListener("keydown", onDocumentKeyDown, false);
+            //document.addEventListener("lightOnOff", onlightOnOff, false);
+
+            light.visible = false;
+            Amblight.visible = false;
+
             camera.position.z = 5;
 
-            sphere.rotateZ(-Math.PI * 0.41);
-
+            sphere.rotateZ(0.41);
+            
             function render() {
                 requestAnimationFrame(render);
-                
-                sphere.rotation.x += 0.01;
-                sphere.rotation.y +=(-Math.PI * 0.0025);
+                sphere.rotateY(0.0025);
 
                 renderer.render(scene, camera);
             }
             render();
-
+            
+            function onDocumentKeyDown(event){ 
+                // Get the key code of the pressed key 
+                var keyCode = event.which;
+                console.log("tecla " + keyCode);
+                if (keyCode == 76 && light.visible == false && Amblight.visible == false){
+                    light.visible = true;
+                    Amblight.visible = true;
+                }
+                else if (keyCode == 76 && light.visible == true && Amblight.visible == true){
+                    light.visible = false;
+                    Amblight.visible = false;
+                }
+            }
+            
+            /*
+            function onlightOnOff(event){
+                var keyCode = event.which;
+                console.log("tecla " + keyCode);
+                if (keyCode == 76){
+                    light.visible = true;
+                    Amblight.visible = true;
+                }
+            }
+            */
             window.addEventListener('resize', function () {				       
                 renderer.setSize(window.innerWidth, window.innerHeight);
                 
