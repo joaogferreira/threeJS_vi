@@ -112,7 +112,7 @@
                 color: 0x222222, 
                 specular: 0xFFFFFF,
                 shininess: 100, 
-                opacity: 0.3, 
+                opacity: 0.0, 
                 transparent: true 
             } )
             
@@ -136,6 +136,7 @@
             } )
             
             
+            
             var sphere3 = new THREE.Mesh( geometry, glassMaterial ); 
             
             sphere3.position.x = -5.5;
@@ -143,6 +144,8 @@
             scene.add( sphere3 ); 
 
             //Exemplo 2.5 - Direita
+
+            
             var geometry4 = new THREE.SphereGeometry(1,10,10);
             
             var sphere4 = new THREE.Mesh( geometry, glassMaterial ); 
