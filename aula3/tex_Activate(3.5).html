@@ -72,11 +72,11 @@
                     Amblight.intensity -=0.1;
                 }
             
-                else if (keyCode == 38){ //keyCode 38 equivale "seta para cima"
+                else if (keyCode == 38){ //keyCode 38 equivale "pg up"
                     sphere.rotation.z += 0.1;
                 }
 
-                else if (keyCode == 40){ //keyCode 38 equivale "seta para cima"
+                else if (keyCode == 40){ //keyCode 38 equivale "pg downs"
                     sphere.rotation.z -= 0.1;
                 }
 
@@ -85,17 +85,16 @@
                     
                 }
 
-                else if (keyCode == 37){ //keyCode 38 equivale "seta para cima"
+                else if (keyCode == 37){ //keyCode 38 equivale "seta para baixo"
                     sphere.rotation.x -= 0.1;
                 }
 
-                else if (keyCode == 33){ //keyCode 38 equivale "seta para cima"
+                else if (keyCode == 33){ //keyCode 38 equivale "seta para baixo"
                     sphere.rotation.y += 0.1;
                 }
 
-                else if (keyCode == 34){ //keyCode 38 equivale "seta para cima"
-                    sphere.rotation.y += 0.1;
-                    
+                else if (keyCode == 34){ //keyCode 38 equivale "seta para esquerda"
+                    sphere.rotation.y += 0.1; 
                 }
  
                 render();
