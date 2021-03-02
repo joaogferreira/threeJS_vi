@@ -5,6 +5,8 @@ Exercícios realizados utilizando Three JS no âmbito da Unidade Curricular Visu
 
 ## Autores
 [João Ferreira](https://github.com/joaogferreira) (jgmpof@gmail.com)
+
+
 [João Magalhães](https://github.com/jrsrm97)
 
 
